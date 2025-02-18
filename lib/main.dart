@@ -1,60 +1,92 @@
 import 'package:flutter/material.dart';
-
+ 
 void main() {
-  runApp(Test());
+  runApp(MyApp());
 }
-// Based on Layout
-/*
-1. Shadow
-2. Depth
-3. Motion
-.
-assets\images\photo01.png
-*/
-
-class Test extends StatelessWidget {
-  const Test({super.key});
-
+ 
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Basic UI - Flutter",
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: Colors.grey[200],
         appBar: AppBar(
-          title: Text("Basic UI - Flutter"),
-          centerTitle: true,
-          elevation: 3.5,
-          foregroundColor: Colors.blue,
-          shadowColor: const Color.fromARGB(167, 128, 128, 128),
+          title: Text('Product Display'),
+          backgroundColor: Colors.black,
         ),
-        body: Container(
-          margin: EdgeInsets.all(50),
-          padding: EdgeInsets.all(30),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/photo01.png'),
-              fit: BoxFit.cover,
-              alignment: Alignment.center,
-              opacity: 1,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: const Color.fromARGB(154, 255, 247, 0),
-                blurRadius: 20,
-                blurStyle: BlurStyle.outer,
+        body: Center(
+          child: ProductCard(),
+        ),
+      ),
+    );
+  }
+}
+ 
+class ProductCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(color: Colors.black12, blurRadius: 5, spreadRadius: 2),
+        ],
+      ),
+      width: 234,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(5),
               ),
-              BoxShadow(
-                color: const Color.fromARGB(255, 34, 34, 34),
-                blurRadius: 10,
-                blurStyle: BlurStyle.outer,
+              child: Text(
+                '50% OFF',
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+          Image.network(
+            'https://nikearprod.vtexassets.com/arquivos/ids/1217812-800-800?width=800&height=800&aspect=true',
+            height: 100,
+          ),
+          SizedBox(height: 11),
+          Text(
+            'Nike Air Shoes',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 6),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '\$500', 
+                style: TextStyle(
+                  decoration: TextDecoration.lineThrough,
+                  color: Colors.grey,
+                ),
+              ),
+              SizedBox(width: 123),
+              Text(
+                '\$450', 
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
               ),
             ],
-            color: const Color.fromARGB(255, 247, 255, 7),
-            borderRadius: BorderRadius.circular(50),
           ),
-          child: Text("Welcome Back..!"),
-        ),
+          SizedBox(height: 90),
+          IconButton(
+            icon: Icon(Icons.favorite, color: Colors.blue, size: 28),
+            onPressed: () {},
+          ),
+        ],
       ),
     );
   }
